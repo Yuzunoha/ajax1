@@ -33,6 +33,6 @@ services:
       - PMA_USER=root
       - PMA_PASSWORD=root
     ports:
-      - 20181:80
+      - 20281:80
     volumes:
       - ./docker/phpmyadmin/sessions:/sessions
