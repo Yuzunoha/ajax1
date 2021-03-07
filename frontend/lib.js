@@ -1,17 +1,26 @@
 'use strict';
 
+const url = 'http://localhost:20280/api/json1';
+const headers = {
+  Accept: 'application/json',
+  'Content-Type': 'application/json',
+};
+
 const jsPost = () => {
-  const url = 'http://localhost:20280/api/json1';
   const method = 'POST';
-  const headers = {
-    Accept: 'application/json',
-    'Content-Type': 'application/json',
-  };
   const body = JSON.stringify({
     hello: 'world',
   });
-  fetch(url, { method, headers, body })
+  return fetch(url, { method, headers, body })
     .then((res) => res.json())
     .then(console.log)
     .catch(console.error);
+};
+
+const jsGet = () => {
+  const method = 'GET';
+  return fetch(url, { method, headers })
+    .then((res) => res.json())
+    .then((json) => json)
+    .catch((err) => err);
 };

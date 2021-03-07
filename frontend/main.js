@@ -2,8 +2,10 @@
 
 const main = () => {
   const p1 = document.getElementById('p1');
-  p1.innerHTML = 'jsから編集しました。';
   jsPost();
+  jsGet().then((json) => {
+    p1.innerHTML = JSON.stringify(json);
+  });
 };
 
 window.addEventListener('load', main, false);
