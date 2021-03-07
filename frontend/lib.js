@@ -1,5 +1,6 @@
 'use strict';
 
+const p = console.log;
 const url = 'http://localhost:20280/api/json1';
 const headers = {
   Accept: 'application/json',
