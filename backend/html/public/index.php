@@ -33,7 +33,8 @@ $app->get('/api/json1', function (Request $request, Response $response) {
 });
 
 $app->post('/api/json1', function (Request $request, Response $response) {
-  return $response->withJson('準備中', 200, JSON_UNESCAPED_UNICODE);
+  $postData = $request->getParsedBody() ?? []; // post body
+  return $response->withJson($postData, 200, JSON_UNESCAPED_UNICODE);
 });
 
 $app->run();
