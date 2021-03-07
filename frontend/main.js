@@ -1,18 +1,25 @@
 'use strict';
 
-const generateTable = (div, objects) => {
-  console.log(objects);
+const generateThTd = (thortd, text) => {
+  const thtd = document.createElement(thortd);
+  const textNode = document.createTextNode(text);
+  thtd.appendChild(textNode);
+  return thtd;
+};
 
+const generateTable = (div, objects) => {
   const table = document.createElement('table');
   const tbody = document.createElement('tbody');
-  for (let j = 0; j < 2; j++) {
+  const trHeader = document.createElement('tr');
+  trHeader.appendChild(generateThTd('th', 'name'));
+  trHeader.appendChild(generateThTd('th', 'address'));
+  trHeader.appendChild(generateThTd('th', 'content'));
+  tbody.appendChild(trHeader);
+  for (const object of objects) {
     const tr = document.createElement('tr');
-    for (let i = 0; i < 2; i++) {
-      const td = document.createElement('td');
-      const textNode = document.createTextNode('cell is row ' + j + ', column ' + i);
-      td.appendChild(textNode);
-      tr.appendChild(td);
-    }
+    tr.appendChild(generateThTd('td', object.name));
+    tr.appendChild(generateThTd('td', object.address));
+    tr.appendChild(generateThTd('td', object.content));
     tbody.appendChild(tr);
   }
   table.appendChild(tbody);
@@ -24,7 +31,7 @@ const generateTable = (div, objects) => {
 const jsonToObjects = (json) => {
   const a = [];
   for (let i = 0; i < json.length; i++) {
-    a.push(JSON.parse(json[0].json));
+    a.push(JSON.parse(json[i].json));
   }
   return a;
 };
