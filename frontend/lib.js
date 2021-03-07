@@ -24,3 +24,7 @@ const jsGet = () => {
     .then((json) => json)
     .catch((err) => err);
 };
+
+const send = () => {
+  alert('推された');
+};
