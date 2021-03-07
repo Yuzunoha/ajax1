@@ -26,5 +26,10 @@ const jsGet = () => {
 };
 
 const send = () => {
-  alert('推された');
+  const name = document.getElementById('name').value;
+  const address = document.getElementById('address').value;
+  const content = document.getElementById('content').value;
+  const obj = { name, address, content };
+  const json = JSON.stringify(obj);
+  alert(json);
 };
