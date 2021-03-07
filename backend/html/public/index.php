@@ -24,23 +24,16 @@ $app->add(function ($req, $res, $next) {
     ->withHeader('Access-Control-Allow-Methods', '*');
 });
 
-$app->get('/random-prefecture', function (Request $request, Response $response) {
-  $sql = 'select * from kvs1';
+$app->get('/api/json1', function (Request $request, Response $response) {
+  $sql = 'select * from json1';
   $sth = pdo()->prepare($sql);
   $sth->execute();
-
-  // [{"_key":"三重県","_value":"津市"},{"_key":"京都府","_value":"京都市"},...]
-  $beans = $sth->fetchAll(PDO::FETCH_ASSOC);
-
-  $prefectures = [];
-  foreach ($beans as $bean) {
-    $prefectures[] = $bean["_key"];
-  }
-  shuffle($prefectures);
-
-  $randomPrefecture = $prefectures[0];
-  $data = ['prefecture' => $randomPrefecture];
+  $data = $sth->fetchAll(PDO::FETCH_ASSOC);
   return $response->withJson($data, 200, JSON_UNESCAPED_UNICODE);
+});
+
+$app->post('/api/json1', function (Request $request, Response $response) {
+  return $response->withJson('準備中', 200, JSON_UNESCAPED_UNICODE);
 });
 
 $app->run();
