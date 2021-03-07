@@ -1,6 +1,8 @@
 'use strict';
 
-const generateTable = (div) => {
+const generateTable = (div, objects) => {
+  console.log(objects);
+
   const table = document.createElement('table');
   const tbody = document.createElement('tbody');
   for (let j = 0; j < 2; j++) {
@@ -19,11 +21,20 @@ const generateTable = (div) => {
   div.appendChild(table);
 };
 
+const jsonToObjects = (json) => {
+  const a = [];
+  for (let i = 0; i < json.length; i++) {
+    a.push(JSON.parse(json[0].json));
+  }
+  return a;
+};
+
 const main = () => {
   const div1 = document.getElementById('div1');
   jsPost();
   jsGet().then((json) => {
-    generateTable(div1);
+    const objects = jsonToObjects(json);
+    generateTable(div1, objects);
     console.log(json);
   });
 };
