@@ -6,11 +6,8 @@ const headers = {
   'Content-Type': 'application/json',
 };
 
-const jsPost = () => {
+const jsPost = (body) => {
   const method = 'POST';
-  const body = JSON.stringify({
-    hello: 'world',
-  });
   return fetch(url, { method, headers, body })
     .then((res) => res.json())
     .then(console.log)
@@ -31,5 +28,5 @@ const send = () => {
   const content = document.getElementById('content').value;
   const obj = { name, address, content };
   const json = JSON.stringify(obj);
-  alert(json);
+  jsPost(json);
 };
