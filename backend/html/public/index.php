@@ -38,7 +38,7 @@ $app->post('/api/json1', function (Request $request, Response $response) {
     return $response->withJson('400 Bad Request', 400, JSON_UNESCAPED_UNICODE);
   }
   $sql = 'insert into json1 (json) values (:json)';
-  $json = json_encode($data);
+  $json = json_encode($data, JSON_UNESCAPED_UNICODE);
   $param = [':json' => $json];
   $stmt = pdo()->prepare($sql);
   $result = $stmt->execute($param);
