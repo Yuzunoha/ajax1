@@ -7,10 +7,18 @@ const headers = {
   'Content-Type': 'application/json',
 };
 
-const jsPost = async (body) => {
+const jsPost = (body) => {
   const method = 'POST';
-  return await fetch(url, { method, headers, body })
-    .then((res) => res.json())
+  return fetch(url, { method, headers, body })
+    .then((res) => {
+      const status = res.status;
+      const json = res.json();
+      return json;
+    })
+    .then((json) => {
+      console.log(json);
+      return json;
+    })
     .catch((err) => err);
 };
 
@@ -58,12 +66,15 @@ const generateTable = (objects) => {
   div.appendChild(table);
 };
 
-const send = () => {
+const send = async () => {
   const name = document.getElementById('name').value;
   const address = document.getElementById('address').value;
   const content = document.getElementById('content').value;
   const obj = { name, address, content };
   const json = JSON.stringify(obj);
+  const result = await jsPost(json);
+  p(result);
+  return;
   jsPost(json).then(() => {
     jsGet().then((json) => {
       const objects = jsonToObjects(json);
