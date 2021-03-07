@@ -15,12 +15,11 @@ const jsPost = (body) => {
     .catch((err) => err);
 };
 
-const jsGet = () => {
+const jsGet = async () => {
   const method = 'GET';
-  return fetch(url, { method, headers })
+  return await fetch(url, { method, headers })
     .then((res) => res.json())
-    .then((json) => json)
-    .catch((err) => err);
+    .catch(p);
 };
 
 const jsonToObjects = (json) => {
