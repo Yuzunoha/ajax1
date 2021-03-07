@@ -33,8 +33,17 @@ $app->get('/api/json1', function (Request $request, Response $response) {
 });
 
 $app->post('/api/json1', function (Request $request, Response $response) {
-  $postData = $request->getParsedBody() ?? []; // post body
-  return $response->withJson($postData, 200, JSON_UNESCAPED_UNICODE);
+  $data = $request->getParsedBody() ?? []; // post body
+  if (in_array('', [$data['name'], $data['address'], $data['content'],])) {
+    return $response->withJson('400 Bad Request', 400, JSON_UNESCAPED_UNICODE);
+  }
+  $sql = 'insert into json1 (json) values (:json)';
+  $json = json_encode($data);
+  $param = [':json' => $json];
+  $stmt = pdo()->prepare($sql);
+  $result = $stmt->execute($param);
+  $statusCode = $result ? 200 : 500;
+  return $response->withJson($result, $statusCode, JSON_UNESCAPED_UNICODE);
 });
 
 $app->run();
