@@ -1,9 +1,8 @@
 'use strict';
 
-const main = () => {
-  jsGet().then((json) => {
-    generateTable(jsonToObjects(json));
-  });
+const main = async () => {
+  const json = await jsGet();
+  generateTable(jsonToObjects(json));
 };
 
 window.addEventListener('load', main, false);
