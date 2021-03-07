@@ -7,11 +7,10 @@ const headers = {
   'Content-Type': 'application/json',
 };
 
-const jsPost = (body) => {
+const jsPost = async (body) => {
   const method = 'POST';
-  return fetch(url, { method, headers, body })
+  return await fetch(url, { method, headers, body })
     .then((res) => res.json())
-    .then((json) => json)
     .catch((err) => err);
 };
 
