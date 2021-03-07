@@ -22,18 +22,12 @@ const jsGet = () => {
     .catch((err) => err);
 };
 
-const send = () => {
-  const name = document.getElementById('name').value;
-  const address = document.getElementById('address').value;
-  const content = document.getElementById('content').value;
-  const obj = { name, address, content };
-  const json = JSON.stringify(obj);
-  jsPost(json).then(() => {
-    jsGet().then((json) => {
-      const objects = jsonToObjects(json);
-      generateTable(objects);
-    });
-  });
+const jsonToObjects = (json) => {
+  const a = [];
+  for (let i = 0; i < json.length; i++) {
+    a.push(JSON.parse(json[i].json));
+  }
+  return a;
 };
 
 const generateThTd = (thortd, text) => {
@@ -65,10 +59,16 @@ const generateTable = (objects) => {
   div.appendChild(table);
 };
 
-const jsonToObjects = (json) => {
-  const a = [];
-  for (let i = 0; i < json.length; i++) {
-    a.push(JSON.parse(json[i].json));
-  }
-  return a;
+const send = () => {
+  const name = document.getElementById('name').value;
+  const address = document.getElementById('address').value;
+  const content = document.getElementById('content').value;
+  const obj = { name, address, content };
+  const json = JSON.stringify(obj);
+  jsPost(json).then(() => {
+    jsGet().then((json) => {
+      const objects = jsonToObjects(json);
+      generateTable(objects);
+    });
+  });
 };
