@@ -72,13 +72,7 @@ const send = async () => {
   const content = document.getElementById('content').value;
   const obj = { name, address, content };
   const json = JSON.stringify(obj);
-  const result = await jsPost(json);
-  p(result);
-  return;
-  jsPost(json).then(() => {
-    jsGet().then((json) => {
-      const objects = jsonToObjects(json);
-      generateTable(objects);
-    });
-  });
+  await jsPost(json);
+  const objects = jsonToObjects(await jsGet());
+  generateTable(objects);
 };

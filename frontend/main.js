@@ -1,8 +1,7 @@
 'use strict';
 
 const main = async () => {
-  const json = await jsGet();
-  const objects = jsonToObjects(json);
+  const objects = jsonToObjects(await jsGet());
   generateTable(objects);
 };
 
