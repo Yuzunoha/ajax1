@@ -1,7 +1,9 @@
 'use strict';
 
 const main = async () => {
-  alert('読み込まれた');
+  const json = await jsGet();
+  const objects = jsonToObjects(json);
+  generateTable(objects);
 };
 
 window.addEventListener('load', main);
